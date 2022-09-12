@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery Add/Remove fields with Bootstrap-5</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+</head>
+<body>
+    <div class="container border mt-5 p-5">
+        <h3 class="mb-4">jQuery Add/Remove fields with Bootstrap-5</h3>
+
+        <!-- Add/Remove fields wrapper -->
+        <div class="row_wrapper">
+            <!-- 1st Field -->
+            <div class="d-flex">
+                <input type="text" class="form-control me-3" name="unique_id[]" placeholder="@unique_id">
+                <input type="number" class="form-control me-3" name="quantity[]" placeholder="quantity" value="1">
+                <button class="add_row_button btn btn-sm btn-primary" title="Add field">
+                    <i class="bi bi-plus-lg"></i>
+                </button>
+            </div>
+            <!--/ 1st Field -->
+            
+            <!-- Add/Remove fields -->
+            <!--/ Add/Remove fields -->
+        </div>
+        <!--/ Add/Remove fields wrapper -->
+    </div>    
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var maxField = 10; //Input fields increment limitation
+            var addButton = $('.add_row_button'); //Add button selector
+            var wrapper = $('.row_wrapper'); //Input field wrapper
+            
+            //New input field html
+            var fieldHTML = '';
+                fieldHTML += '<div class="d-flex mt-3">';
+                fieldHTML += '<input type="text" class="form-control me-3" name="unique_id[]" placeholder="@unique_id">'; 
+                fieldHTML += '<input type="number" class="form-control me-3" name="quantity[]" placeholder="quantity" value="1">'; 
+                fieldHTML += '<button class="remove_row_button btn btn-sm btn-danger">'; 
+                fieldHTML += '<i class="bi bi-dash-lg"></i>'; 
+                fieldHTML += '</button>'; 
+                fieldHTML += '</div>'; 
+
+            var x = 1; //Initial field counter is 1
+
+            //Once add button is clicked
+            $(addButton).click(function () {
+                //Check maximum number of input fields
+                if (x < maxField) {
+                    x++; //Increment field counter
+                    $(wrapper).append(fieldHTML); //Add field html
+                }
+            });
+
+            //Once remove button is clicked
+            $(wrapper).on('click', '.remove_row_button', function (e) {
+                e.preventDefault();
+                $(this).parent('div').remove(); //Remove field html
+                x--; //Decrement field counter
+            });
+        });
+    </script>
+</body>
+</html>
